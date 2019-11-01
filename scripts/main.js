@@ -2,10 +2,24 @@
  *
  *    NSEW Script-based Virtual Keyboard - Version 0.1 - 10/31/2019
  *
- *    Copyright (c) 2019 - Alexandre Paloschi Horta
+ *    Copyright 2019 - Alexandre Paloschi Horta
  *
  *    Licensed under GPL
  *
+ *    This program is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ *    **********************************************************************
  *
  *    NSEW is a virtual keyboard layout aimed towards text insertion via
  *    remote control directional keys (up, right, down, left and enter) 
@@ -38,6 +52,9 @@
  *    under the cursor, then presses ENTER (or 5, in this demonstration). The 
  *    chosen character is inserted in the field area and the cursor gets 
  *    back to the central position (the § character).
+ *
+ *
+ *
  *
  *
  ***************************************************************************/
