@@ -55,8 +55,15 @@ var paths =
         [28, 23, 5, 12], [5, 22, 18, 13], [14, 21, 24, 6],
         [15, 6, 25, 20], [7, 16, 23, 19], [22, 17, 7, 18],
         [20, 25, 29, 10],[21, 10, 27, 24],[0, 1, 2, 3],
-        [25, 0, 17, 28], [29, 27, 12, 0], [24, 4, 28, 4]];
+        [25, 0, 26, 28], [29, 27, 26, 0], [24, 4, 28, 4]];
 
+var controls = {
+    up: "8",
+    right: "6",
+    down: "2",
+    left: "4",
+    enter: "5"
+};
 
 function populate(){
 
@@ -78,22 +85,27 @@ function walk(event){
     var neighbor;
     var selected = null;
 
-    if (press == "8"){
+    if (press == controls.up){
         neighbor = 0;
     }
-    else if (press == "6"){
+    else if (press == controls.right){
         neighbor = 1;
     }
-    else if (press == "2"){
+    else if (press == controls.down){
         neighbor = 2;
     }
-    else if (press == "4"){
+    else if (press == controls.left){
         neighbor = 3;
     }
-    else if (press == "5"){
+    else if (press == controls.enter){
         selected = NSEW_layout[Number(activeId)];
         select(selected);
-        neighbor = 26;
+        if (selected.includes("Bksp")){
+            neighbor = 28;
+        }
+        else {
+            neighbor = 26;
+        }
     }
 
     var jumpto;
@@ -120,11 +132,15 @@ function select(key){
     else{
         var key = key[meta.active];
         var kbd = document.getElementsByClassName("NSEW_input")[0];
+        var kbdLen = kbd.length;
     }
 
     switch(key){
         case "Bksp":
             kbd.value = kbd.value.slice(0,-1);
+            break;
+        case "Cls":
+            kbd.value = kbd.value.slice(0, kbdLen-1);
             break;
         default:
             kbd.value += key;
