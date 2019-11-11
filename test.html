@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>NSEW keyboard tests</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+  <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+
+  <script src="keyboard.js"></script>
+
+  <script>
+
+    var gridConf;
+
+    QUnit.todo("Keyboard Grid needs an Array", function(assert) {
+        gridConf = "XXX";
+        assert.raises(makeGrid(gridConf), new Error('Error'), "Not an array is an error.");
+    });
+
+    QUnit.test("Keyboard Grid, if the argument is Array", function(assert) {
+        gridConf = [];
+        assert.equal(makeGrid(gridConf), "<table></table>", "An empty array makes an empty table.");
+        gridConf = [""];
+        assert.equal(makeGrid(gridConf), "<table><tr></tr></table>", "An empty item makes an empty row.");
+    });
+    
+    QUnit.test("Keyboard Grid, creating cells", function(assert) {
+        gridConf = ["-"];
+        assert.equal(makeGrid(gridConf), "<table><tr><td></td></tr></table>", "A dash creates a cell.");
+        gridConf = ["--"];
+        assert.equal(makeGrid(gridConf), '<table><tr><td colspan="2"></td></tr></table>',
+                "Dashes indicate the number of merged columns");
+    });
+  </script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+</body>
+</html>
