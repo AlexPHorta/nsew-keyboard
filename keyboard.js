@@ -13,29 +13,40 @@ function makeGrid(conf) {
 
     for (el in conf) {
         var elem = conf[el];
-        if (elem.length==0) {
+        var elemLength = elem.length;
+        if (elemLength==0) {
             gridContents.push("<tr></tr>");
         }
         else {
             gridContents.push("<tr>");
-            var cSpan = 0;
-            var cellNum = 0;
+            var numCells = 0;
+            var cellType = "";
+            var prev = "";
             for (c in elem) {
-                if (elem[c]=="-") {
-                    cSpan++;
+                if (prev==="") {
+                    cellType = elem[c];
+                    numCells++;
+                    prev = elem[c];
                 }
-                cellNum++;
-            }
-            if (cSpan>1) {
-                var row = "<td colspan=\"" + cSpan + "\"></td>";
-            }
-            else {
-                for (var c = cellNum;c>0;c--) {
-                    gridContents.push("<td></td>");
+                else if (elem[c]===prev) {
+                    numCells++;
+                }
+                else if (c<elemLength-1 && elem[c]!==prev) {
+                    if (prev==="*") {
+                        for (var c=numCells; c>0; c--) {
+                            gridContents.push("<td></td>");
+                        }
+                    }
+                    else if (prev==="-") {
+                        var dSpan = "<td colspan=\"" + numCells + "\"></td>";
+                        gridContents.push(dSpan);
+                    }
+                else if (c==elemLength-1 && elem[c]!==prev) {
+                   // TODO: resolver como fica o último elemento da linha!!! 
+                    numCells = 1;
+                    cellType = elem[c];
                 }
             }
-
-            gridContents.push(row);
 
             gridContents.push("</tr>");
 
