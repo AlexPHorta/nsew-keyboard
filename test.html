@@ -43,10 +43,16 @@
         assert.equal(makeGrid(gridConf), '<table><tr><td></td><td></td>' +
                 '<td></td></tr><tr><td colspan="3"></td></tr></table>',
                 "Stars make single table cells");
+    });
+    QUnit.test("Keyboard Grid, mixing cells", function(assert) {
         gridConf = ["---*---"];
         assert.equal(makeGrid(gridConf), '<table><tr><td colspan="3"></td>' +
                 '<td></td><td colspan="3"></td></tr></table>',
                 "Dashes and stars");
+        gridConf = ["*--*--*"];
+        assert.equal(makeGrid(gridConf), '<table><tr><td></td><td colspan="2"></td>' +
+            '<td></td><td colspan="2"></td><td></td></tr></table>',
+               "Dashes, and more stars");
     });
 
   </script>
