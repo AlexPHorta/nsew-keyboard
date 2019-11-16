@@ -11,6 +11,7 @@
   <script>
 
     var gridConf;
+    var kbdKeys = "0123456789abcdefghijklmnopqrst";
 
     QUnit.todo("Keyboard Grid needs an Array", function(assert) {
         gridConf = "XXX";
@@ -54,12 +55,26 @@
             '<td></td><td colspan="2"></td><td></td></tr></table>',
                "Dashes, and more stars");
         gridConf = ["---0---"];
-        assert.equal(makeGrid(gridConf), '<table><tr><td colspan="3"></td>' +
+        assert.equal(makeGrid(gridConf, kbdKeys), '<table><tr><td colspan="3"></td>' +
                 '<td id="0" class="key"></td><td colspan="3"></td></tr></table>',
                "Dashes, and a zero");
-    });
-
-  </script>
+        gridConf = ["---0---", "--1-2--", "-3---4-"];
+        assert.equal(makeGrid(gridConf, kbdKeys), '<table><tr><td colspan="3"></td>' +
+                '<td id="0" class="key"></td><td colspan="3"></td></tr>' +
+                '<tr><td colspan="2"></td><td id="1" class="key"></td>' +
+                '<td></td><td id="2" class="key"></td><td colspan="2"></td></tr>' +
+                '<tr><td></td><td id="3" class="key"></td><td colspan="3"></td>' +
+                '<td id="4" class="key"></td><td></td></tr></table>',
+                "Dashes, and numbers, a more complex example");
+        gridConf = ["---0---", "-1_-2_-", "-3_-4_-"];
+        assert.equal(makeGrid(gridConf, kbdKeys), '<table><tr><td colspan="3"></td>' +
+                '<td id="0" class="key"></td><td colspan="3"></td></tr>' +
+                '<tr><td></td><td id="1" class="key" colspan="2"></td><td></td>' +
+                '<td id="2" class="key" colspan="2"></td><td></td></tr>' +
+                '<tr><td></td><td id="3" class="key" colspan="2"></td><td></td>' +
+                '<td id="4" class="key" colspan="2"></td><td></td></tr>' +
+                "Underscores make a numbered cell span multiple columns");
+        });
 </head>
 <body>
   <div id="qunit"></div>

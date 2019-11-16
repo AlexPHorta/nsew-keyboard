@@ -1,4 +1,4 @@
-function makeGrid(conf) {
+function makeGrid(conf, keyss="") {
     // Make the table that will serve as the keyboard's structure from an array
     // of characters that indicate the layout, e.g.:
     //
@@ -8,6 +8,8 @@ function makeGrid(conf) {
     // Hopefully this will make it easier to rearrange the keyboard's layout
     // simply modifying the configuration array.
 
+
+    var kbdKeys = keyss;
     var confIsArray = conf instanceof Array;
     var gridContents = [];
 
@@ -42,8 +44,14 @@ function makeGrid(conf) {
         var lin = mkCells(conf[ln]);
         for (ob in lin) {
             if (lin[ob].quant === 1 || lin[ob].elem === "*"){
-                for (var i=lin[ob].quant; i>0; i--) {
-                    gridContents.push("<td></td>");
+                if (lin[ob].elem === "*" || lin[ob].elem === "-") {
+                    for (var i=lin[ob].quant; i>0; i--) {
+                        gridContents.push("<td></td>");
+                    }
+                }
+                else {
+                    var keyId = kbdKeys.indexOf(lin[ob].elem);
+                    gridContents.push("<td id=\"" + keyId + "\" class=\"key\"></td>");
                 }
             }
             else if (lin[ob].elem === "-") {
