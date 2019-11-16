@@ -53,6 +53,10 @@
         assert.equal(makeGrid(gridConf), '<table><tr><td></td><td colspan="2"></td>' +
             '<td></td><td colspan="2"></td><td></td></tr></table>',
                "Dashes, and more stars");
+        gridConf = ["---0---"];
+        assert.equal(makeGrid(gridConf), '<table><tr><td colspan="3"></td>' +
+                '<td id="0" class="key"></td><td colspan="3"></td></tr></table>',
+               "Dashes, and a zero");
     });
 
   </script>
