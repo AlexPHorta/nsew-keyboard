@@ -45,6 +45,7 @@
                 '<td></td></tr><tr><td colspan="3"></td></tr></table>',
                 "Stars make single table cells");
     });
+
     QUnit.test("Keyboard Grid, mixing cells", function(assert) {
         gridConf = ["---*---"];
         assert.equal(makeGrid(gridConf), '<table><tr><td colspan="3"></td>' +
@@ -72,9 +73,10 @@
                 '<tr><td></td><td id="1" class="key" colspan="2"></td><td></td>' +
                 '<td id="2" class="key" colspan="2"></td><td></td></tr>' +
                 '<tr><td></td><td id="3" class="key" colspan="2"></td><td></td>' +
-                '<td id="4" class="key" colspan="2"></td><td></td></tr>' +
+                '<td id="4" class="key" colspan="2"></td><td></td></tr></table>', 
                 "Underscores make a numbered cell span multiple columns");
-        });
+    });
+    </script>
 </head>
 <body>
   <div id="qunit"></div>

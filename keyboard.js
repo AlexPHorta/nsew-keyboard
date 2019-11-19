@@ -28,7 +28,7 @@ function makeGrid(conf, keyss="") {
     function mkCells (line) {
         var objs = [];
         for (c in line) {
-            if (line[c] !== line[c-1]) {
+            if (line[c] === "*" || (line[c] !== line[c-1] && line[c] !== "_")) {
                 var ob = new Cell(line[c], 1);
                 objs.push(ob);
             }
@@ -36,29 +36,34 @@ function makeGrid(conf, keyss="") {
                 objs[objs.length-1].incr();
             }
         }
+        console.log(objs);
         return objs;
     }
 
     for (ln in conf) {
-        gridContents.push("<tr>");
+        gridContents.push('<tr>');
         var lin = mkCells(conf[ln]);
         for (ob in lin) {
-            if (lin[ob].quant === 1 || lin[ob].elem === "*"){
-                if (lin[ob].elem === "*" || lin[ob].elem === "-") {
-                    for (var i=lin[ob].quant; i>0; i--) {
-                        gridContents.push("<td></td>");
-                    }
+            var keyId = kbdKeys.indexOf(lin[ob].elem);
+            var celSp = lin[ob].quant;
+            if (keyId >= 0) {
+                if (celSp === 1) {
+                    gridContents.push('<td id="' + keyId + '" class="key"></td>');
                 }
                 else {
-                    var keyId = kbdKeys.indexOf(lin[ob].elem);
-                    gridContents.push("<td id=\"" + keyId + "\" class=\"key\"></td>");
+                    gridContents.push('<td id="' + keyId + '" class="key" colspan="' + celSp + '"></td>');
                 }
             }
-            else if (lin[ob].elem === "-") {
-                gridContents.push("<td colspan=\"" + lin[ob].quant + "\"></td>");
+            else{
+                if (celSp === 1) {
+                    gridContents.push('<td></td>');
+                }
+                else {
+                    gridContents.push('<td colspan="' + celSp + '"></td>');
+                }
             }
         }
-        gridContents.push("</tr>");
+        gridContents.push('</tr>');
     }
-    return "<table>" + gridContents.join("") + "</table>";
+    return '<table>' + gridContents.join("") + '</table>';
 }
