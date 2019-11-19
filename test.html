@@ -76,6 +76,11 @@
                 '<td id="4" class="key" colspan="2"></td><td></td></tr></table>', 
                 "Underscores make a numbered cell span multiple columns");
     });
+
+    QUnit.test("Keyboard starts with active Meta", function(assert) {
+        assert.equal(genDirMap(gridConf), false,
+                "The keyboard must start with the Meta key active.");
+    });
     </script>
 </head>
 <body>

@@ -12,6 +12,7 @@ function makeGrid(conf, keyss="") {
     var kbdKeys = keyss;
     var confIsArray = conf instanceof Array;
     var gridContents = [];
+    let tbl = document.createElement('table');
 
     if (!confIsArray) {
         throw new Error('Error');
@@ -41,29 +42,22 @@ function makeGrid(conf, keyss="") {
     }
 
     for (ln in conf) {
-        gridContents.push('<tr>');
+        let tr = document.createElement('tr');
         var lin = mkCells(conf[ln]);
         for (ob in lin) {
             var keyId = kbdKeys.indexOf(lin[ob].elem);
             var celSp = lin[ob].quant;
+            let td = document.createElement('td');
             if (keyId >= 0) {
-                if (celSp === 1) {
-                    gridContents.push('<td id="' + keyId + '" class="key"></td>');
-                }
-                else {
-                    gridContents.push('<td id="' + keyId + '" class="key" colspan="' + celSp + '"></td>');
-                }
+                td.id = keyId;
+                td.className = 'key';
             }
-            else{
-                if (celSp === 1) {
-                    gridContents.push('<td></td>');
-                }
-                else {
-                    gridContents.push('<td colspan="' + celSp + '"></td>');
-                }
+            if (celSp > 1) {
+                td.colSpan = celSp;
             }
+            tr.appendChild(td);
         }
-        gridContents.push('</tr>');
+        tbl.appendChild(tr);
     }
-    return '<table>' + gridContents.join("") + '</table>';
+    return tbl.outerHTML.toString();
 }
