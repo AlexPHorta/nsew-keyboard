@@ -11,11 +11,13 @@ function makeGrid(conf, keyss="") {
 
     var kbdKeys = keyss;
     var confIsArray = conf instanceof Array;
+    console.log("confIsArray ", confIsArray);
     var gridContents = [];
     let tbl = document.createElement('table');
 
     if (!confIsArray) {
-        throw new Error('Error');
+        throw new Error("Feed me an Array!");
+        console.log("Feed me an Array!");
     }
 
     function Cell (elem, quant) {
@@ -28,7 +30,7 @@ function makeGrid(conf, keyss="") {
 
     function mkCells (line) {
         var objs = [];
-        for (c in line) {
+        for (var c in line) {
             if (line[c] === "*" || (line[c] !== line[c-1] && line[c] !== "_")) {
                 var ob = new Cell(line[c], 1);
                 objs.push(ob);
@@ -41,10 +43,10 @@ function makeGrid(conf, keyss="") {
         return objs;
     }
 
-    for (ln in conf) {
+    for (var ln in conf) {
         let tr = document.createElement('tr');
         var lin = mkCells(conf[ln]);
-        for (ob in lin) {
+        for (var ob in lin) {
             var keyId = kbdKeys.indexOf(lin[ob].elem);
             var celSp = lin[ob].quant;
             let td = document.createElement('td');

@@ -15,8 +15,7 @@
 
     QUnit.todo("Keyboard Grid needs an Array", function(assert) {
         gridConf = "XXX";
-        assert.raises(makeGrid(gridConf), new Error('Error'),
-                "Not an array is an error.");
+        assert.raises(makeGrid(gridConf), new Error("Feed me an Array!"),            "Not an array is an error.");
     });
 
     QUnit.test("Keyboard Grid, if the argument is Array", function(assert) {
