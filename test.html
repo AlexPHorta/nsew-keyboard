@@ -7,6 +7,7 @@
   <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
 
   <script src="keyboard.js"></script>
+  <script src="conf.js"></script>
 
   <script>
 
@@ -76,10 +77,12 @@
                 "Underscores make a numbered cell span multiple columns");
     });
 
-    QUnit.test("Keyboard starts with active Meta", function(assert) {
-        assert.equal(genDirMap(gridConf), false,
-                "The keyboard must start with the Meta key active.");
+    QUnit.test("Keys list generator", function(assert) {
+        gridConf = kbdGrid;
+        assert.equal(genKbdKeys(gridConf), "0123456789abcdefghijklmnopqrst",
+                "Generate the list of keys.");
     });
+
     </script>
 </head>
 <body>

@@ -1,3 +1,10 @@
+function genKbdKeys(conf) {
+    let kbdKeys = conf.toString();
+    kbdKeys = kbdKeys.replace(/-|_|\*|,/g,"");
+    kbdKeys = kbdKeys.sort();
+    console.log(kbdKeys);
+}
+
 function makeGrid(conf, keyss="") {
     // Make the table that will serve as the keyboard's structure from an array
     // of characters that indicate the layout, e.g.:
@@ -17,7 +24,6 @@ function makeGrid(conf, keyss="") {
 
     if (!confIsArray) {
         throw new Error("Feed me an Array!");
-        console.log("Feed me an Array!");
     }
 
     function Cell (elem, quant) {
@@ -34,12 +40,10 @@ function makeGrid(conf, keyss="") {
             if (line[c] === "*" || (line[c] !== line[c-1] && line[c] !== "_")) {
                 var ob = new Cell(line[c], 1);
                 objs.push(ob);
-            }
-            else { 
+            } else { 
                 objs[objs.length-1].incr();
             }
         }
-        console.log(objs);
         return objs;
     }
 

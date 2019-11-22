@@ -9,5 +9,3 @@ kbdGrid = ["-----8-----",
            "----f2e----",
            "----l6k----",
            "----pao----"];
-
-kbdKeys = "0123456789abcdefghijklmnopqrst";
