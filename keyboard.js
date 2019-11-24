@@ -1,11 +1,12 @@
 function genKbdKeys(conf) {
     let kbdKeys = conf.toString();
     kbdKeys = kbdKeys.replace(/-|_|\*|,/g,"");
-    kbdKeys = kbdKeys.sort();
+    kbdKeys = kbdKeys.split('').sort().join('');
     console.log(kbdKeys);
+    return kbdKeys;
 }
 
-function makeGrid(conf, keyss="") {
+function makeGrid(conf) {
     // Make the table that will serve as the keyboard's structure from an array
     // of characters that indicate the layout, e.g.:
     //
@@ -16,7 +17,7 @@ function makeGrid(conf, keyss="") {
     // simply modifying the configuration array.
 
 
-    var kbdKeys = keyss;
+    var kbdKeys = genKbdKeys(conf);
     var confIsArray = conf instanceof Array;
     console.log("confIsArray ", confIsArray);
     var gridContents = [];
