@@ -1,4 +1,17 @@
+function genCursorWalkPaths(conf) {
+    let paths = [];
+    let keys = genKbdKeys(conf);
+    let numKeys = keys.length;
+
+    for (let i=0; i<conf.length-1; i++) {
+        if (keys.search(conf[i][0]) >= 0) {
+        }
+    }
+}
+
 function genKbdKeys(conf) {
+    // Generate the string that will determine the id's of the keys.
+    
     let kbdKeys = conf.toString();
     kbdKeys = kbdKeys.replace(/-|_|\*|,/g,"");
     kbdKeys = kbdKeys.split('').sort().join('');
@@ -9,13 +22,6 @@ function genKbdKeys(conf) {
 function makeGrid(conf) {
     // Make the table that will serve as the keyboard's structure from an array
     // of characters that indicate the layout, e.g.:
-    //
-    // "-----8-----" --> <td colspan="5"></td><td id="8" class="key></td><td colspan="5"></td>
-    // "-----4t_---" --> <td colspan="5"></td><td id="4" class="key colspan="2"></td><td colspan="3"></td>
-    //
-    // Hopefully this will make it easier to rearrange the keyboard's layout
-    // simply modifying the configuration array.
-
 
     var kbdKeys = genKbdKeys(conf);
     var confIsArray = conf instanceof Array;
