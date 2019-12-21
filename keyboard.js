@@ -1,3 +1,6 @@
+"use strict";
+
+
 function genCursorWalkPaths(conf) {
     let paths = [];
     let keys = genKbdKeys(conf);
@@ -11,7 +14,7 @@ function genCursorWalkPaths(conf) {
 
 function genKbdKeys(conf) {
     // Generate the string that will determine the id's of the keys.
-    
+
     let kbdKeys = conf.toString();
     kbdKeys = kbdKeys.replace(/-|_|\*|,/g,"");
     kbdKeys = kbdKeys.split('').sort().join('');
@@ -21,17 +24,12 @@ function genKbdKeys(conf) {
 
 function makeGrid(conf) {
     // Make the table that will serve as the keyboard's structure from an array
-    // of characters that indicate the layout, e.g.:
+    // of characters that indicate the layout.
 
-    var kbdKeys = genKbdKeys(conf);
-    var confIsArray = conf instanceof Array;
-    console.log("confIsArray ", confIsArray);
-    var gridContents = [];
+    console.assert(conf instanceof Array, "Feed me an Array!");
+    let kbdKeys = genKbdKeys(conf);
+    let gridContents = [];
     let tbl = document.createElement('table');
-
-    if (!confIsArray) {
-        throw new Error("Feed me an Array!");
-    }
 
     function Cell (elem, quant) {
         this.elem = elem;
@@ -42,24 +40,24 @@ function makeGrid(conf) {
     }
 
     function mkCells (line) {
-        var objs = [];
-        for (var c in line) {
+        let objs = [];
+        for (let c in line) {
             if (line[c] === "*" || (line[c] !== line[c-1] && line[c] !== "_")) {
-                var ob = new Cell(line[c], 1);
+                let ob = new Cell(line[c], 1);
                 objs.push(ob);
-            } else { 
+            } else {
                 objs[objs.length-1].incr();
             }
         }
         return objs;
     }
 
-    for (var ln in conf) {
+    for (let ln in conf) {
         let tr = document.createElement('tr');
-        var lin = mkCells(conf[ln]);
-        for (var ob in lin) {
-            var keyId = kbdKeys.indexOf(lin[ob].elem);
-            var celSp = lin[ob].quant;
+        let lin = mkCells(conf[ln]);
+        for (let ob in lin) {
+            let keyId = kbdKeys.indexOf(lin[ob].elem);
+            let celSp = lin[ob].quant;
             let td = document.createElement('td');
             if (keyId >= 0) {
                 td.id = keyId;
