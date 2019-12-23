@@ -1,7 +1,7 @@
 NSEW Virtual Keyboard
 =====================
 
-*NSEW* is a virtual keyboard designed for text insertion via remote control directional keys (up, right, down, left and enter) or a numpad. The normal keyboard layout (a retangular box) is clumsy when used with this kind of device or in these specific conditions.
+*NSEW* is a virtual keyboard designed for text insertion via remote control directional keys (_up_, _right_, _down_, _left_ and _enter_) or a numpad. The normal keyboard layout (a retangular box) is clumsy when used with this kind of device or in these specific conditions.
 
 *NSEW* tries to solve this situation minimizing the number of strokes needed to select a specific character, in accordance with the common letter frequency of the English language (for now, other languages will be added soon).
 
