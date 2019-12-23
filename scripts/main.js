@@ -1,6 +1,6 @@
 /****************************************************************************
  *
- *    NSEW Script-based Virtual Keyboard - Version 0.1 - 10/31/2019
+ *    NSEW Virtual Keyboard - Version 0.1 - 10/31/2019
  *
  *    Copyright 2019 - Alexandre Paloschi Horta
  *
@@ -58,18 +58,10 @@ class NSEWK {
         this.meta = {
         active: 0,
         options: 4,
-        shift: function(){
+        alter: function(){
             this.active = (this.active + 1) % this.options;
             }
         };
-
-        // this.controls = {
-        //     up: "8",
-        //     right: "6",
-        //     down: "2",
-        //     left: "4",
-        //     enter: "5"
-        // };
 
         this.up = "8";
         this.right = "6";
@@ -77,7 +69,6 @@ class NSEWK {
         this.left = "4";
         this.enter = "5";
 
-        console.log(this.enter);
     }
 
     populate(){
@@ -92,30 +83,30 @@ class NSEWK {
     }
 
     walk(event){
-        let press = event.key;
+        let press = String(event.key);
+        console.log(this.up);
         let active = document.getElementsByClassName("active")[0];
         let activeId = active.id;
         let neighbor;
         let selected = null;
         let jumpto;
 
-
-        if (press == this.up){
+        if (press === this.up){
             neighbor = 0;
         }
-        else if (press == this.right){
+        else if (press === this.right){
             neighbor = 1;
         }
-        else if (press == this.down){
+        else if (press === this.down){
             neighbor = 2;
         }
-        else if (press == this.left){
+        else if (press === this.left){
             neighbor = 3;
         }
-        else if (press == this.enter){
+        else if (press === this.enter){
             // console.log(this.layout[Number(activeId)]);
             selected = this.layout[Number(activeId)];
-            select(selected);
+            this.select(selected);
             if (selected.includes("Bksp")){
                 neighbor = 28;
             }
@@ -128,20 +119,20 @@ class NSEWK {
             jumpto = neighbor;
         }
         else {
-            console.log(this.routes[Number(activeId)][neighbor]);
+            // console.log(this.routes[Number(activeId)][neighbor]);
             jumpto = this.routes[Number(activeId)][neighbor];
         }
 
         if (jumpto >= 0){
-            draw(activeId, jumpto);
+            this.draw(activeId, jumpto);
         }
     }
 
     select(key){
 
         if (key.includes("Meta")){
-            this.meta.shift();
-            populate();
+            this.meta.alter();
+            this.populate();
         }
         else{
             let key_ = key[this.meta.active];
@@ -175,7 +166,7 @@ class NSEWK {
 
 let keyboard = new NSEWK();
 keyboard.populate();
-document.addEventListener("keypress", keyboard.walk);
+document.addEventListener("keydown", keyboard.walk);
 
 // let NSEW_layout =
 //         [
@@ -194,7 +185,7 @@ document.addEventListener("keypress", keyboard.walk);
 // let meta = {
 //     active: 0,
 //     options: 4,
-//     shift: function(){
+//     alter: function(){
 //         this.active = (this.active + 1) % this.options;
 //     }
 // };
@@ -281,7 +272,7 @@ document.addEventListener("keypress", keyboard.walk);
 // function select(key){
 
 //     if (key.includes("Meta")){
-//         meta.shift();
+//         meta.alter();
 //         populate();
 //     }
 //     else{
