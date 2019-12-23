@@ -1,17 +1,6 @@
 "use strict";
 
 
-function genCursorWalkPaths(conf) {
-    let paths = [];
-    let keys = genKbdKeys(conf);
-    let numKeys = keys.length;
-
-    for (let i=0; i<conf.length-1; i++) {
-        if (keys.search(conf[i][0]) >= 0) {
-        }
-    }
-}
-
 function genKbdKeys(conf) {
     // Generate the string that will determine the id's of the keys.
 
