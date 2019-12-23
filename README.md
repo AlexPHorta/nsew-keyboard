@@ -1,5 +1,8 @@
+NSEW Virtual Keyboard
+=====================
+
 NSEW is a virtual keyboard layout aimed towards text insertion via
-remote control directional keys (up, right, down, left and enter) 
+remote control directional keys (up, right, down, left and enter)
 or a numpad. The normal keyboard layout (a retangular box) is clumsy
 when used with this kind of device or in these specific conditions.
 
@@ -16,9 +19,9 @@ below.
          r
          i  cls
     spc  e  bks
-             
+
     x y     u p
-  c h o  §  t n d 
+  c h o  §  t n d
     j g     m b
 
        f a w
@@ -28,5 +31,5 @@ below.
 
 The user presses the directional keys until the desired character is
 under the cursor, then presses ENTER (or 5, in this demonstration). The
-chosen character is inserted in the field area and the cursor gets 
+chosen character is inserted in the field area and the cursor gets
 back to the central position (the § character).
