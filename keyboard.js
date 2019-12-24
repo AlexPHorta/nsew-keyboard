@@ -1,6 +1,19 @@
 "use strict";
 
 
+let kbdGrid =
+          ["-----8-----",
+           "-----4t_---",
+           "---r_0s_---",
+           "-----------",
+           "--nh---ci--",
+           "-b73-q-159-",
+           "--mg---dj--",
+           "-----------",
+           "----f2e----",
+           "----l6k----",
+           "----pao----"];
+
 function genKbdKeys(conf) {
     // Generate the string that will determine the id's of the keys.
 

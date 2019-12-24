@@ -21,8 +21,6 @@
  *
  ***************************************************************************/
 
-// "use strict";
-
 
 let NSEW_layout =
         [
@@ -67,6 +65,7 @@ let controls = {
     enter: "5"
 };
 
+/** Fills the keyboard table with the corresponding letters/characters. */
 function populate(){
     let charKeys = document.getElementsByClassName("char");
     let numChars = charKeys.length;
@@ -77,6 +76,10 @@ function populate(){
     }
 }
 
+/**
+* Controls the movement of the active key.
+* @param {object} event - a keyboard event.
+*/
 function walk(event){
     let press = event.key;
     let active = document.getElementsByClassName("active")[0];
@@ -121,6 +124,10 @@ function walk(event){
     }
 }
 
+/**
+* Fires the correspondent key character/action to the input area.
+* @param {array} key_ - An array with the corresponding outputs for each keyboard mode.
+*/
 function select(key_){
     let key = key_[meta.active];
     let kbd = document.getElementsByClassName("NSEW_input")[0];
@@ -142,6 +149,9 @@ function select(key_){
     }
 }
 
+/**
+* Changes the classes of the keys, for visual feedback.
+*/
 function draw(here, whereto){
     let h = Number(here);
     let w = Number(whereto);
