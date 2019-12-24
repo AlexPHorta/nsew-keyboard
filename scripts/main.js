@@ -77,14 +77,12 @@ class NSEWK {
         let metaActive = this.meta.active;
 
         for (let i = 0; i < numChars; i++){
-            // console.log(this.layout[Number(charKeys[i].id)][metaActive]);
             charKeys[i].innerText = this.layout[Number(charKeys[i].id)][metaActive];
         }
     }
 
     walk(event){
         let press = String(event.key);
-        console.log(this.up);
         let active = document.getElementsByClassName("active")[0];
         let activeId = active.id;
         let neighbor;
@@ -104,7 +102,6 @@ class NSEWK {
             neighbor = 3;
         }
         else if (press === this.enter){
-            // console.log(this.layout[Number(activeId)]);
             selected = this.layout[Number(activeId)];
             this.select(selected);
             if (selected.includes("Bksp")){
@@ -119,7 +116,6 @@ class NSEWK {
             jumpto = neighbor;
         }
         else {
-            // console.log(this.routes[Number(activeId)][neighbor]);
             jumpto = this.routes[Number(activeId)][neighbor];
         }
 
