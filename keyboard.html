@@ -15,11 +15,11 @@
 <meta http-equiv="expires" content="0">
 <style type="text/css">
 
-#kbd { text-align: center; border-spacing: 2px; }
+#kbd { float: left; text-align: center; padding: 15px; border-spacing: 2px; background-color: #fff; }
 
 #kbd td { padding: 5px; }
 
-.key { min-width: 18px; border: 2px solid #aaa; border-radius: 4px; color: #444;
+.key { min-width: 28px; border: 2px solid #aaa; border-radius: 4px; color: #444;
     background-color: #ccc; }
 
 .active { border: 2px solid red; font-weight: bold; color: #000;
@@ -113,14 +113,15 @@
 	<td id="24" class="key char"></td>
 	<td colspan="4"></td>
 </tr>
-<tr>
-	<td colspan="11"></td>
-</tr>
 </table>
-</div>
+<h2>Instructions</h2>
+<p>Use 8, 6, 2 and 4 (up, right, down, left) keys to change the selected key. Press 5 (enter) to select the key.</p>
+<p>The chosen character will be written to the form and the cursor will return to the central key (the one with the §).</p>
+<p>Select the central key (§) to change the keyboard mode (lowercase, uppercase, symbols, numbers).</p>
 <form action="">
     <textarea name="message" style="width:350px; height:200px;" class="NSEW_input"></textarea>
 </form>
+</div>
 <script src="scripts/main.js"></script>
 </body>
 </html>
