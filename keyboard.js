@@ -39,6 +39,7 @@ let NSEW_layout =
 let meta = {
     active: 0,
     options: 4,
+    def: function(){ this.active = 0 },
     alter: function(){
         this.active = (this.active + 1) % this.options;
     }
@@ -145,6 +146,10 @@ function select(key_){
             break;
         default:
             kbd.value += key;
+            if (meta.active === 1){
+               meta.def();
+               populate();
+            }
             break;
     }
 }
