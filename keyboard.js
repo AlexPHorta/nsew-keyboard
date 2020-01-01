@@ -22,8 +22,8 @@
  ***************************************************************************/
 
 
-let NSEW_layout =
-        [
+let NSEW_layout = {
+        eng: [
         ["e", "E", ".", "1"], ["t", "T", ",", "7"], ["a", "A", ";", "0"],
         ["o", "O", ":", "4"], ["i", "I", "!", "2"], ["n", "N", "?", "8"],
         ["s", "S", "'", "¢"], ["h", "H", '"', "5"], ["r", "R", "-", "3"],
@@ -34,11 +34,25 @@ let NSEW_layout =
         ["k", "K", "[", "£"], ["j", "J", "<", "ª"], ["x", "X", ">", "\\"],
         ["q", "Q", "}", "="], ["z", "Z", "{", "°"], ["Meta", "Meta", "Meta", "Meta"],
         [" ", " ", " ", " "], ["Bksp", "Bksp", "Bksp", "Bksp"],
-        ["Cls", "Cls", "Cls", "Cls"]];
+        ["Cls", "Cls", "Cls", "Cls"]],
+        por: [
+        ["a", "A", ".", "1"], ["e", "E", ",", "7"], ["o", "O", ";", "0"],
+        ["s", "S", ":", "4"], ["r", "R", "!", "2"], ["i", "I", "?", "8"],
+        ["n", "N", "'", "¢"], ["d", "D", '"', "5"], ["m", "M", "-", "3"],
+        ["u", "U", ")", "9"], ["t", "T", "@", "%"], ["c", "C", "(", "6"],
+        ["l", "L", "#", "/"], ["p", "P", "$", ","], ["v", "V", "&", "-"],
+        ["g", "G", "*", "+"], ["h", "H", "_", "."], ["q", "Q", "~", "*"],
+        ["b", "B", "^", "|"], ["f", "F", "/", "º"], ["z", "Z", "]", "¬"],
+        ["j", "J", "[", "£"], ["x", "X", "<", "ª"], ["k", "K", ">", "\\"],
+        ["w", "W", "}", "="], ["y", "Y", "{", "°"], ["Meta", "Meta", "Meta", "Meta"],
+        [" ", " ", " ", " "], ["Bksp", "Bksp", "Bksp", "Bksp"],
+        ["Cls", "Cls", "Cls", "Cls"]]
+    }
 
-let meta = {
+let config = {
     active: 0,
     options: 4,
+    layout: 'eng',
     def: function(){
         this.active = 0;
         populate();
@@ -74,10 +88,10 @@ let controls = {
 function populate(){
     let charKeys = document.getElementsByClassName("char");
     let numChars = charKeys.length;
-    let metaActive = meta.active;
+    let activeConf = config.active;
 
     for (i = 0; i < numChars; i++){
-        charKeys[i].innerText = NSEW_layout[Number(charKeys[i].id)][metaActive];
+        charKeys[i].innerText = NSEW_layout[config.layout][Number(charKeys[i].id)][activeConf];
     }
 }
 
@@ -105,7 +119,7 @@ function walk(event){
         neighbor = 3;
     }
     else if (press == controls.enter){
-        selected = NSEW_layout[Number(activeId)];
+        selected = NSEW_layout[config.layout][Number(activeId)];
         select(selected);
         if (selected.includes("Bksp")){
             neighbor = 28;
@@ -134,12 +148,12 @@ function walk(event){
 * @param {array} key_ - An array with the corresponding outputs for each keyboard mode.
 */
 function select(key_){
-    let key = key_[meta.active];
+    let key = key_[config.active];
     let kbd = document.getElementsByClassName("NSEW_input")[0];
     let kbdLen = kbd.length;
     switch(key){
         case "Meta":
-            meta.alter();
+            config.alter();
             break;
         case "Bksp":
             kbd.value = kbd.value.slice(0,-1);
@@ -149,8 +163,8 @@ function select(key_){
             break;
         default:
             kbd.value += key;
-            if (meta.active === 1){
-               meta.def();
+            if (config.active === 1){
+               config.def();
             }
             break;
     }
