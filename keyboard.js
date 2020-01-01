@@ -39,9 +39,13 @@ let NSEW_layout =
 let meta = {
     active: 0,
     options: 4,
-    def: function(){ this.active = 0 },
+    def: function(){
+        this.active = 0;
+        populate();
+    },
     alter: function(){
         this.active = (this.active + 1) % this.options;
+        populate();
     }
 };
 
@@ -136,7 +140,6 @@ function select(key_){
     switch(key){
         case "Meta":
             meta.alter();
-            populate();
             break;
         case "Bksp":
             kbd.value = kbd.value.slice(0,-1);
@@ -148,7 +151,6 @@ function select(key_){
             kbd.value += key;
             if (meta.active === 1){
                meta.def();
-               populate();
             }
             break;
     }
