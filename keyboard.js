@@ -32,7 +32,7 @@ let NSEW_layout = {
         ["f", "F", "*", "+"], ["g", "G", "_", "."], ["y", "Y", "~", "*"],
         ["p", "P", "^", "|"], ["b", "B", "/", "º"], ["v", "V", "]", "¬"],
         ["k", "K", "[", "£"], ["j", "J", "<", "ª"], ["x", "X", ">", "\\"],
-        ["q", "Q", "}", "="], ["z", "Z", "{", "°"], ["Meta", "Meta", "Meta", "Meta"],
+        ["q", "Q", "}", "="], ["z", "Z", "{", "°"], ["Mode", "Mode", "Mode", "Mode"],
         ["Spc", "Spc", "Spc", "Spc"], ["Bksp", "Bksp", "Bksp", "Bksp"],
         ["Cls", "Cls", "Cls", "Cls"]],
         por: [
@@ -44,7 +44,7 @@ let NSEW_layout = {
         ["g", "G", "*", "+"], ["h", "H", "_", "."], ["q", "Q", "~", "*"],
         ["b", "B", "^", "|"], ["f", "F", "/", "º"], ["z", "Z", "]", "¬"],
         ["j", "J", "[", "£"], ["x", "X", "<", "ª"], ["k", "K", ">", "\\"],
-        ["w", "W", "}", "="], ["y", "Y", "{", "°"], ["Meta", "Meta", "Meta", "Meta"],
+        ["w", "W", "}", "="], ["y", "Y", "{", "°"], ["Mode", "Mode", "Mode", "Mode"],
         ["Spc", "Spc", "Spc", "Spc"], ["Bksp", "Bksp", "Bksp", "Bksp"],
         ["Cls", "Cls", "Cls", "Cls"]]
     }
@@ -89,7 +89,6 @@ function populate(){
     let charKeys = document.getElementsByClassName("key");
     let numChars = charKeys.length;
     let activeConf = config.active;
-
     for (i = 0; i < numChars; i++){
         charKeys[i].innerText = NSEW_layout[config.layout][Number(charKeys[i].id)][activeConf];
     }
@@ -105,7 +104,7 @@ function walk(event){
     let activeId = active.id;
     let neighbor;
     let selected = null;
-
+    let jumpto;
     if (press == controls.up){
         neighbor = 0;
     }
@@ -128,16 +127,12 @@ function walk(event){
             neighbor = 26;
         }
     }
-
-    let jumpto;
-
     if (neighbor == 26){
         jumpto = neighbor;
     }
     else {
         jumpto = paths[Number(activeId)][neighbor];
     }
-
     if (jumpto >= 0){
         draw(activeId, jumpto);
     }
@@ -152,7 +147,7 @@ function select(key_){
     let kbd = document.getElementsByClassName("NSEW_input")[0];
     let kbdLen = kbd.length;
     switch(key){
-        case "Meta":
+        case "Mode":
             config.alter();
             break;
         case "Bksp":
@@ -180,11 +175,7 @@ function draw(here, whereto){
     let h = Number(here);
     let w = Number(whereto);
     document.getElementById(h.toString()).classList.remove('active');
-    document.getElementById(h.toString()).classList.add('active');
-    // document.getElementById(h.toString()).className =
-    // document.getElementById(h.toString()).className.replace( /(?:^|\s)active(?!\S)/g , '' );
-
-    // document.getElementById(w.toString()).className += " active";
+    document.getElementById(w.toString()).classList.add('active');
 }
 
 
@@ -209,7 +200,7 @@ function genKbdKeys(conf) {
     let kbdKeys = conf.toString();
     kbdKeys = kbdKeys.replace(/-|_|\*|,/g,'');
     kbdKeys = kbdKeys.split('').sort().join('');
-    console.log(kbdKeys);
+    // console.log(kbdKeys);
     return kbdKeys;
 }
 
