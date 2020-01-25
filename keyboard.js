@@ -33,7 +33,7 @@ let NSEW_layout = {
         ["p", "P", "^", "|"], ["b", "B", "/", "º"], ["v", "V", "]", "¬"],
         ["k", "K", "[", "£"], ["j", "J", "<", "ª"], ["x", "X", ">", "\\"],
         ["q", "Q", "}", "="], ["z", "Z", "{", "°"], ["Meta", "Meta", "Meta", "Meta"],
-        [" ", " ", " ", " "], ["Bksp", "Bksp", "Bksp", "Bksp"],
+        ["Spc", "Spc", "Spc", "Spc"], ["Bksp", "Bksp", "Bksp", "Bksp"],
         ["Cls", "Cls", "Cls", "Cls"]],
         por: [
         ["a", "A", ".", "1"], ["e", "E", ",", "7"], ["o", "O", ";", "0"],
@@ -45,7 +45,7 @@ let NSEW_layout = {
         ["b", "B", "^", "|"], ["f", "F", "/", "º"], ["z", "Z", "]", "¬"],
         ["j", "J", "[", "£"], ["x", "X", "<", "ª"], ["k", "K", ">", "\\"],
         ["w", "W", "}", "="], ["y", "Y", "{", "°"], ["Meta", "Meta", "Meta", "Meta"],
-        [" ", " ", " ", " "], ["Bksp", "Bksp", "Bksp", "Bksp"],
+        ["Spc", "Spc", "Spc", "Spc"], ["Bksp", "Bksp", "Bksp", "Bksp"],
         ["Cls", "Cls", "Cls", "Cls"]]
     }
 
@@ -86,7 +86,7 @@ let controls = {
 
 /** Fills the keyboard table with the corresponding letters/characters. */
 function populate(){
-    let charKeys = document.getElementsByClassName("char");
+    let charKeys = document.getElementsByClassName("key");
     let numChars = charKeys.length;
     let activeConf = config.active;
 
@@ -161,6 +161,9 @@ function select(key_){
         case "Cls":
             kbd.value = kbd.value.slice(0, kbdLen-1);
             break;
+        case "Spc":
+            kbd.value += " ";
+            break;
         default:
             kbd.value += key;
             if (config.active === 1){
@@ -176,15 +179,13 @@ function select(key_){
 function draw(here, whereto){
     let h = Number(here);
     let w = Number(whereto);
+    document.getElementById(h.toString()).classList.remove('active');
+    document.getElementById(h.toString()).classList.add('active');
+    // document.getElementById(h.toString()).className =
+    // document.getElementById(h.toString()).className.replace( /(?:^|\s)active(?!\S)/g , '' );
 
-    document.getElementById(h.toString()).className =
-    document.getElementById(h.toString()).className.replace( /(?:^|\s)active(?!\S)/g , '' );
-
-    document.getElementById(w.toString()).className += " active";
+    // document.getElementById(w.toString()).className += " active";
 }
-
-populate();
-document.addEventListener("keydown", walk);
 
 
 /* Automatic generation of the keyboard's table */
@@ -220,6 +221,7 @@ function makeGrid(conf) {
     let kbdKeys = genKbdKeys(conf);
     let gridContents = [];
     let tbl = document.createElement('table');
+    tbl.id = 'kbd';
 
     function Cell (elem, quant) {
         'use strict';
@@ -253,7 +255,13 @@ function makeGrid(conf) {
             let td = document.createElement('td');
             if (keyId >= 0) {
                 td.id = keyId;
-                td.className = 'key';
+                td.classList.add('key');
+            }
+            if (keyId >= 0 && keyId <= 25) {
+                td.classList.add('char');
+            }
+            if (keyId === 26) {
+                td.classList.add('active');
             }
             if (celSp > 1) {
                 td.colSpan = celSp;
@@ -262,5 +270,15 @@ function makeGrid(conf) {
         }
         tbl.appendChild(tr);
     }
-    return tbl.outerHTML.toString();
+    return tbl;
 }
+
+function insertKbd(grid) {
+    let container = document.getElementById('NSEWContainer');
+    let kbd = makeGrid(grid);
+    container.appendChild(kbd);
+}
+
+insertKbd(kbdGrid);
+populate();
+document.addEventListener("keydown", walk);
