@@ -107,8 +107,7 @@ function populate(){
 */
 function walk(event){
     let press = event.key;
-    let active = document.getElementsByClassName("active")[0];
-    let activeId = active.id;
+    let activeId = document.getElementsByClassName("active")[0].id;
     let neighbor;
     let selected = null;
     let jumpto;
