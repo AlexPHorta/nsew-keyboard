@@ -9,4 +9,4 @@ NSEW Virtual Keyboard
 
 ![NSEW Virtual Keyboard - screen capture](nsew.jpg)
 
-The user presses the directional keys until the desired character is under the cursor, then presses ENTER (or 5, in this demonstration). The chosen character is inserted in the field area and the cursor gets back to the central position (the § character).
+The user presses the directional keys until the desired character is under the cursor, then presses ENTER (or 5, in this demonstration). The chosen character is inserted in the field area and the cursor gets back to the central position (the _Mode_ key).
