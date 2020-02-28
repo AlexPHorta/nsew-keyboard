@@ -7,6 +7,8 @@ NSEW Virtual Keyboard
 
 **NSEW** tries to solve this situation minimizing the number of strokes needed to select a specific character, in accordance with the common letter frequency of the English language (for now, other languages will be added soon).
 
-![NSEW Virtual Keyboard - screen capture](nsew.jpg)
+<p align="center">
+  <img src="nsew.jpg" alt="NSEW Virtual Keyboard"/></a>
+</p>
 
 The user presses the directional keys until the desired character is under the cursor, then presses ENTER (or 5, in this demonstration). The chosen character is inserted in the field area and the cursor gets back to the central position (the _Mode_ key).
