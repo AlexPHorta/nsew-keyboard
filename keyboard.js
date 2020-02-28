@@ -49,23 +49,26 @@ let NSEW_layout = {
         ["Cls", "Cls", "Cls", "Cls"]]
     }
 
+/** Control the state of the keyboard. **/
 let config = {
     active: 0,
     options: 4,
     capslock: false,
     layout: 'eng',
+
     def: function(){
         this.active = 0;
         populate();
     },
+
     alter: function(){
         this.active = (this.active + 1) % this.options;
         populate();
     }
 };
 
-let paths =
-        [
+/** Define the possible paths of the cursor. **/
+let paths = [
         [4, 28, 26, 27], [12, 5, 13, 26], [26, 14, 6, 15],
         [17, 26, 16, 7], [8, 29, 0, 29],  [18, 9, 19, 1],
         [2, 20, 10, 21], [23, 3, 22, 11], [10, -1, 4, -1],
@@ -75,7 +78,8 @@ let paths =
         [28, 23, 5, 12], [5, 22, 18, 13], [14, 21, 24, 6],
         [15, 6, 25, 20], [7, 16, 23, 19], [22, 17, 7, 18],
         [20, 25, 29, 10],[21, 10, 27, 24],[0, 1, 2, 3],
-        [25, 0, 26, 28], [29, 27, 26, 0], [24, 4, 28, 4]];
+        [25, 0, 26, 28], [29, 27, 26, 0], [24, 4, 28, 4]
+];
 
 let controls = {
     up: "8",
@@ -85,18 +89,20 @@ let controls = {
     enter: "5"
 };
 
-/** Fills the keyboard table with the corresponding letters/characters. */
+/** Fill the keyboard table with the corresponding letters/characters. */
 function populate(){
     let charKeys = document.getElementsByClassName("key");
     let numChars = charKeys.length;
     let activeConf = config.active;
+
     for (i = 0; i < numChars; i++){
-        charKeys[i].innerText = NSEW_layout[config.layout][Number(charKeys[i].id)][activeConf];
+        charKeys[i].innerText =
+        NSEW_layout[config.layout][Number(charKeys[i].id)][activeConf];
     }
 }
 
 /**
-* Controls the movement of the active key.
+* Control the movement of the active key.
 * @param {object} event - a keyboard event.
 */
 function walk(event){
@@ -106,47 +112,53 @@ function walk(event){
     let neighbor;
     let selected = null;
     let jumpto;
-    if (press == controls.up){
-        neighbor = 0;
+
+    switch (press){
+        case controls.up:
+            neighbor = 0;
+            break;
+        case controls.right:
+            neighbor = 1;
+            break;
+        case controls.down:
+            neighbor = 2;
+            break;
+        case controls.left:
+            neighbor = 3;
+            break;
+        case controls.enter:
+            selected = NSEW_layout[config.layout][Number(activeId)];
+            select(selected);
+            if (selected.includes("Bksp")){
+                neighbor = 28;
+            }
+            else {
+                neighbor = 26;
+            }
+            break;
     }
-    else if (press == controls.right){
-        neighbor = 1;
-    }
-    else if (press == controls.down){
-        neighbor = 2;
-    }
-    else if (press == controls.left){
-        neighbor = 3;
-    }
-    else if (press == controls.enter){
-        selected = NSEW_layout[config.layout][Number(activeId)];
-        select(selected);
-        if (selected.includes("Bksp")){
-            neighbor = 28;
-        }
-        else {
-            neighbor = 26;
-        }
-    }
+
     if (neighbor == 26){
         jumpto = neighbor;
     }
     else {
         jumpto = paths[Number(activeId)][neighbor];
     }
+
     if (jumpto >= 0){
         draw(activeId, jumpto);
     }
 }
 
 /**
-* Fires the correspondent key character/action to the input area.
+* Fire the correspondent key character/action to the input area.
 * @param {array} key_ - An array with the corresponding outputs for each keyboard mode.
 */
 function select(key_){
     let key = key_[config.active];
     let kbd = document.getElementsByClassName("NSEW_input")[0];
     let kbdLen = kbd.length;
+
     switch(key){
         case "Mode":
             config.alter();
@@ -172,17 +184,19 @@ function select(key_){
 }
 
 /**
-* Changes the classes of the keys, for visual feedback.
+* Change the classes of the keys, for visual feedback.
 */
 function draw(here, whereto){
     let h = Number(here);
     let w = Number(whereto);
+
     document.getElementById(h.toString()).classList.remove('active');
     document.getElementById(w.toString()).classList.add('active');
 }
 
-
+/************************************************/
 /* Automatic generation of the keyboard's table */
+/************************************************/
 
 let kbdGrid =
           ["-----8-----",
@@ -197,19 +211,19 @@ let kbdGrid =
            "----l6k----",
            "----pao----"];
 
+/** Generate the string that will determine the id's of the keys. **/
 function genKbdKeys(conf) {
-    // Generate the string that will determine the id's of the keys.
     'use strict';
     let kbdKeys = conf.toString();
     kbdKeys = kbdKeys.replace(/-|_|\*|,/g,'');
     kbdKeys = kbdKeys.split('').sort().join('');
-    // console.log(kbdKeys);
     return kbdKeys;
 }
 
+/** Make the table that will serve as the keyboard's structure from an array
+*   of characters that indicate the layout.
+*/
 function makeGrid(conf) {
-    // Make the table that will serve as the keyboard's structure from an array
-    // of characters that indicate the layout.
     'use strict';
     console.assert(conf instanceof Array, 'Feed me an Array!');
     let kbdKeys = genKbdKeys(conf);
@@ -243,10 +257,12 @@ function makeGrid(conf) {
     for (let ln in conf) {
         let tr = document.createElement('tr');
         let lin = mkCells(conf[ln]);
+
         for (let ob in lin) {
             let keyId = kbdKeys.indexOf(lin[ob].elem);
             let celSp = lin[ob].quant;
             let td = document.createElement('td');
+
             if (keyId >= 0) {
                 td.id = keyId;
                 td.classList.add('key');
