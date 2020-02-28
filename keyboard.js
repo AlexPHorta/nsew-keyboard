@@ -52,6 +52,7 @@ let NSEW_layout = {
 let config = {
     active: 0,
     options: 4,
+    capslock: false,
     layout: 'eng',
     def: function(){
         this.active = 0;
@@ -162,7 +163,9 @@ function select(key_){
         default:
             kbd.value += key;
             if (config.active === 1){
-               config.def();
+                if (config.capslock === false) {
+                    config.def();
+                }
             }
             break;
     }
@@ -252,7 +255,7 @@ function makeGrid(conf) {
                 td.classList.add('char');
             }
             if (keyId === 26) {
-                td.classList.add('active');
+                td.classList.add('mode', 'active');
             }
             if (celSp > 1) {
                 td.colSpan = celSp;
