@@ -22,57 +22,37 @@
  ***************************************************************************/
 
 
-
-/** Control the state of the keyboard. **/
-let config = {
-    active: 0,
-    options: 4,
-    capslock: false,
-    layout: 'eng',
-    NSEW_layout = /* alpha + symbnum */
-
-    def: function(){
-        this.active = 0;
-        populate();
-    },
-
-    alter: function(){
-        this.active = (this.active + 1) % this.options;
-        populate();
-    }
-};
-
-let alpha = {
+let alphachar = {
     eng: [
-            ["e", "E"], ["t", "T"], ["a", "A"],
-            ["o", "O"], ["i", "I"], ["n", "N"],
-            ["s", "S"], ["h", "H"], ["r", "R"],
-            ["d", "D"], ["l", "L"], ["c", "C"],
-            ["u", "U"], ["m", "M"], ["w", "W"],
-            ["f", "F"], ["g", "G"], ["y", "Y"],
-            ["p", "P"], ["b", "B"], ["v", "V"],
-            ["k", "K"], ["j", "J"], ["x", "X"],
-            ["q", "Q"], ["z", "Z"], ["Mode", "Mode"],
-            ["Spc", "Spc"], ["Bksp", "Bksp"],
-            ["Cls", "Cls"]
-        ],
+        ["e", "E"], ["t", "T"], ["a", "A"],
+        ["o", "O"], ["i", "I"], ["n", "N"],
+        ["s", "S"], ["h", "H"], ["r", "R"],
+        ["d", "D"], ["l", "L"], ["c", "C"],
+        ["u", "U"], ["m", "M"], ["w", "W"],
+        ["f", "F"], ["g", "G"], ["y", "Y"],
+        ["p", "P"], ["b", "B"], ["v", "V"],
+        ["k", "K"], ["j", "J"], ["x", "X"],
+        ["q", "Q"], ["z", "Z"], ["Mode", "Mode"],
+        ["Spc", "Spc"], ["Bksp", "Bksp"],
+        ["Cls", "Cls"]
+    ],
     por: [
-            ["a", "A"], ["e", "E"], ["o", "O"],
-            ["s", "S"], ["r", "R"], ["i", "I"],
-            ["n", "N"], ["d", "D"], ["m", "M"],
-            ["u", "U"], ["t", "T"], ["c", "C"],
-            ["l", "L"], ["p", "P"], ["v", "V"],
-            ["g", "G"], ["h", "H"], ["q", "Q"],
-            ["b", "B"], ["f", "F"], ["z", "Z"],
-            ["j", "J"], ["x", "X"], ["k", "K"],
-            ["w", "W"], ["y", "Y"], ["Mode", "Mode"],
-            ["Spc", "Spc"], ["Bksp", "Bksp"],
-            ["Cls", "Cls"]
-        ]
-    }
+        ["a", "A"], ["e", "E"], ["o", "O"],
+        ["s", "S"], ["r", "R"], ["i", "I"],
+        ["n", "N"], ["d", "D"], ["m", "M"],
+        ["u", "U"], ["t", "T"], ["c", "C"],
+        ["l", "L"], ["p", "P"], ["v", "V"],
+        ["g", "G"], ["h", "H"], ["q", "Q"],
+        ["b", "B"], ["f", "F"], ["z", "Z"],
+        ["j", "J"], ["x", "X"], ["k", "K"],
+        ["w", "W"], ["y", "Y"], ["Mode", "Mode"],
+        ["Spc", "Spc"], ["Bksp", "Bksp"],
+        ["Cls", "Cls"]
+    ]
+}
 
-let symbnum = {
-        [
+let symbnumchar = {
+    def: [
         [".", "1"], [",", "7"], [";", "0"],
         [":", "4"], ["!", "2"], ["?", "8"],
         ["'", "¢"], ['"', "5"], ["-", "3"],
@@ -86,19 +66,43 @@ let symbnum = {
     ]
 }
 
+/** Control the state of the keyboard. **/
+let config = {
+    active: 0,
+    options: 4,
+    capslock: false,
+    alpha: 'eng',
+    symbnum: 'def',
+
+    def: function(){
+        this.active = 0;
+        populate();
+    },
+
+    alter: function(){
+        this.active = (this.active + 1) % this.options;
+        populate();
+    }
+};
+
+let NSEW_layout = alphachar[config.alpha].map(
+            function(e, i) {
+                return e.concat(symbnumchar[config.symbnum][i]);
+            }
+        );
 
 /** Define the possible paths of the cursor. **/
 let paths = [
-        [4, 28, 26, 27], [12, 5, 13, 26], [26, 14, 6, 15],
-        [17, 26, 16, 7], [8, 29, 0, 29],  [18, 9, 19, 1],
-        [2, 20, 10, 21], [23, 3, 22, 11], [10, -1, 4, -1],
-        [-1, 11, -1, 5], [6, 24, 8, 25],  [-1, 7, -1, 9],
-        [28, 18, 1, 26], [1, 19, -1, 26], [26, 15, 20, 2],
-        [26, 2, 21, 14], [3, 26, -1, 22], [27, 26, 3, 23],
-        [28, 23, 5, 12], [5, 22, 18, 13], [14, 21, 24, 6],
-        [15, 6, 25, 20], [7, 16, 23, 19], [22, 17, 7, 18],
-        [20, 25, 29, 10],[21, 10, 27, 24],[0, 1, 2, 3],
-        [25, 0, 26, 28], [29, 27, 26, 0], [24, 4, 28, 4]
+    [4, 28, 26, 27], [12, 5, 13, 26], [26, 14, 6, 15],
+    [17, 26, 16, 7], [8, 29, 0, 29],  [18, 9, 19, 1],
+    [2, 20, 10, 21], [23, 3, 22, 11], [10, -1, 4, -1],
+    [-1, 11, -1, 5], [6, 24, 8, 25],  [-1, 7, -1, 9],
+    [28, 18, 1, 26], [1, 19, -1, 26], [26, 15, 20, 2],
+    [26, 2, 21, 14], [3, 26, -1, 22], [27, 26, 3, 23],
+    [28, 23, 5, 12], [5, 22, 18, 13], [14, 21, 24, 6],
+    [15, 6, 25, 20], [7, 16, 23, 19], [22, 17, 7, 18],
+    [20, 25, 29, 10],[21, 10, 27, 24],[0, 1, 2, 3],
+    [25, 0, 26, 28], [29, 27, 26, 0], [24, 4, 28, 4]
 ];
 
 let controls = {
@@ -117,7 +121,7 @@ function populate(){
 
     for (i = 0; i < numChars; i++){
         charKeys[i].innerText =
-        NSEW_layout[config.layout][Number(charKeys[i].id)][activeConf];
+        NSEW_layout[Number(charKeys[i].id)][activeConf];
     }
 }
 
@@ -146,7 +150,7 @@ function walk(event){
             neighbor = 3;
             break;
         case controls.enter:
-            selected = NSEW_layout[config.layout][Number(activeId)];
+            selected = NSEW_layout[Number(activeId)];
             select(selected);
             if (selected.includes("Bksp")){
                 neighbor = 28;
