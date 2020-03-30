@@ -1,3 +1,4 @@
+/** Define the alphanumeric half of the keyboard **/
 let alphachar = {
     eng: [
         ["e", "E"], ["t", "T"], ["a", "A"],
@@ -27,6 +28,7 @@ let alphachar = {
     ]
 }
 
+/** Define the symbol/numeric half of the keyboard **/
 let symbnumchar = {
     def: [
         [".", "1"], [",", "7"], [";", "0"],
@@ -61,6 +63,7 @@ let config = {
     }
 };
 
+/** Create the keyboard layout from the selected halves. **/
 let NSEW_layout = alphachar[config.alpha].map(
             function(e, i) {
                 return e.concat(symbnumchar[config.symbnum][i]);
@@ -81,6 +84,7 @@ let paths = [
     [25, 0, 26, 28], [29, 27, 26, 0], [24, 4, 28, 4]
 ];
 
+/** Define the physical keyboard keys to be used to control the keyboard **/
 let controls = {
     up: "8",
     right: "6",
@@ -89,7 +93,7 @@ let controls = {
     enter: "5"
 };
 
-/** Fill the keyboard table with the corresponding letters/characters. */
+/** Fill the keyboard table with the corresponding letters/characters. **/
 function populate(){
     let charKeys = document.getElementsByClassName("key");
     let numChars = charKeys.length;
@@ -197,6 +201,15 @@ function draw(here, whereto){
 /* Automatic generation of the keyboard's table */
 /************************************************/
 
+/**
+ * Define the keyboard's structure.
+ * 
+ * 1. Dashes '-' create a 'colspan' cell with the number of dashes;
+ * 2. Numbers and characters from [0-9] and [a-t] create the cells with
+ *    sequential numeric IDs;
+ * 3. Underlines, when following a character from number 2 above, make
+ *    the cell a 'colspan' one.
+ */
 let kbdGrid =
           ["-----8-----",
            "-----4t_---",
@@ -219,8 +232,9 @@ function genKbdKeys(conf) {
     return kbdKeys;
 }
 
-/** Make the table that will serve as the keyboard's structure from an array
-*   of characters that indicate the layout.
+/**
+*  Make the table that will serve as the keyboard's structure from an array
+*  of characters that indicate the layout.
 */
 function makeGrid(conf) {
     'use strict';
@@ -282,8 +296,9 @@ function makeGrid(conf) {
     return tbl;
 }
 
+/** Insert the keyboard in the destination html element. */
 function insertKbd(grid) {
-    let container = document.getElementById('NSEWContainer');
+    let container = document.getElementById('NSEW_container');
     let kbd = makeGrid(grid);
     container.appendChild(kbd);
 }
