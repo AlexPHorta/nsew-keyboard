@@ -65,7 +65,7 @@ Give an example
 
 ## Deployment
 
-NSEW is very simple to use. Simply add the *NSEW_container* ID to an empty *div*, and a *NSEW_input* class to an *input* element.
+**NSEW** is very simple to use. Simply add the *NSEW_container* ID to an empty `div`, and a *NSEW_input* class to an `input` element.
 
 ## Built With
 
