@@ -204,10 +204,11 @@ function draw(here, whereto){
 /**
  * Define the keyboard's structure.
  * 
- * 1. Dashes '-' create a 'colspan' cell with the number of dashes;
+ * 1. Dashes '-' create a 'colspan' empty cell with 'colspan' being
+ *    the number of dashes;
  * 2. Numbers and characters from [0-9] and [a-t] create the cells with
  *    sequential numeric IDs;
- * 3. Underlines, when following a character from number 2 above, make
+ * 3. Underlines, when following a character from number 2 and above, make
  *    the cell a 'colspan' one.
  */
 let kbdGrid =
