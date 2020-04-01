@@ -1,0 +1,32 @@
+{
+  "name": "nsew-keyboard",
+  "version": "0.1.0",
+  "description": "A virtual keyboard designed for remote controllers and pointing devices with only directional keys.",
+  "main": "nsew.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "qunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexPHorta/nsew-keyboard.git"
+  },
+  "keywords": [
+    "javascript",
+    "digital",
+    "virtual",
+    "keyboard",
+    "screen-keyboard",
+    "accessibility",
+    "onscreen",
+    "component"
+  ],
+  "author": "Alexandre Paloschi Horta <alexandre@buey.net.br> (https://www.buey.net.br)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexPHorta/nsew-keyboard/issues"
+  },
+  "homepage": "https://www.buey.net.br/pages/nsew-virtual-keyboard/"
+}
