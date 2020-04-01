@@ -13,6 +13,20 @@ NSEW Virtual Keyboard
 
 The user presses the directional keys until the desired character is under the cursor, then presses ENTER (or 5, in this demonstration). The chosen character is inserted in the field area and the cursor gets back to the central position (the _Mode_ key).
 
+## Testing
+
+Run the tests with:
+
+```
+$ npm test
+```
+
+or directly with:
+
+```
+$ mocha
+```
+
 ## Deployment
 
 **NSEW** is very simple to use. Simply add the *NSEW_container* ID to an empty `div`, and a *NSEW_input* class to an `input` element.

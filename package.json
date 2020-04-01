@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "description": "A virtual keyboard designed for remote controllers and pointing devices with only directional keys.",
   "main": "nsew.js",
+  "type": "module",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "qunit"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

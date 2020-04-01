@@ -237,7 +237,7 @@ function genKbdKeys(conf) {
 *  Make the table that will serve as the keyboard's structure from an array
 *  of characters that indicate the layout.
 */
-function makeGrid(conf) {
+export function makeGrid(conf) {
     'use strict';
     console.assert(conf instanceof Array, 'Feed me an Array!');
     let kbdKeys = genKbdKeys(conf);
