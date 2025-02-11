@@ -24,10 +24,14 @@
     "onscreen",
     "component"
   ],
-  "author": "Alexandre Paloschi Horta <alexandre@buey.net.br> (https://www.buey.net.br)",
+  "author": "Alexandre Paloschi Horta <alexandre.horta@gmail.com> (https://www.buey.net.br)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AlexPHorta/nsew-keyboard/issues"
   },
-  "homepage": "https://www.buey.net.br/pages/nsew-virtual-keyboard/"
+  "homepage": "https://www.buey.net.br/pages/nsew-virtual-keyboard/",
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "mocha": "^11.1.0"
+  }
 }
