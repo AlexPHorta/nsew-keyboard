@@ -1,8 +1,7 @@
 "use strict"
 
 /** Define the alphanumeric half of the keyboard **/
-export let alphachar = {
-    eng: [
+const en = new Set([
         ["e", "E"], ["t", "T"], ["a", "A"],
         ["o", "O"], ["i", "I"], ["n", "N"],
         ["s", "S"], ["h", "H"], ["r", "R"],
@@ -12,10 +11,10 @@ export let alphachar = {
         ["p", "P"], ["b", "B"], ["v", "V"],
         ["k", "K"], ["j", "J"], ["x", "X"],
         ["q", "Q"], ["z", "Z"], ["Mode", "Mode"],
-        ["Spc", "Spc"], ["Bksp", "Bksp"],
-        ["Cls", "Cls"]
-    ],
-    por: [
+        ["Spc", "Spc"], ["Bksp", "Bksp"], ["Cls", "Cls"]
+]);
+
+const pt = new Set([
         ["a", "A"], ["e", "E"], ["o", "O"],
         ["s", "S"], ["r", "R"], ["i", "I"],
         ["n", "N"], ["d", "D"], ["m", "M"],
@@ -25,7 +24,10 @@ export let alphachar = {
         ["b", "B"], ["f", "F"], ["z", "Z"],
         ["j", "J"], ["x", "X"], ["k", "K"],
         ["w", "W"], ["y", "Y"], ["Mode", "Mode"],
-        ["Spc", "Spc"], ["Bksp", "Bksp"],
-        ["Cls", "Cls"]
-    ]
+        ["Spc", "Spc"], ["Bksp", "Bksp"], ["Cls", "Cls"]
+]);
+
+export const alphachar = {
+    eng: en,
+    por: pt
 }
