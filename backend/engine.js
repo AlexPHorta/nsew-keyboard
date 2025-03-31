@@ -31,3 +31,40 @@ export const alphachar = {
     eng: en,
     por: pt
 }
+
+/** Define the symbol/numeric half of the keyboard **/
+const symbnum = new Set([
+    [".", "1"], [",", "7"], [";", "0"],
+    [":", "4"], ["!", "2"], ["?", "8"],
+    ["'", "¢"], ['"', "5"], ["-", "3"],
+    [")", "9"], ["@", "%"], ["(", "6"],
+    ["#", "/"], ["$", ","], ["&", "-"],
+    ["*", "+"], ["_", "."], ["~", "*"],
+    ["^", "|"], ["/", "º"], ["]", "¬"],
+    ["[", "£"], ["<", "ª"], [">", "\\"],
+    ["}", "="], ["{", "°"], ["Mode", "Mode"],
+    ["Spc", "Spc"], ["Bksp", "Bksp"], ["Cls", "Cls"]
+]);
+
+export const symbnumchar = {
+    def: symbnum
+}
+
+/** Control the state of the keyboard. **/
+export let config = {
+    active: 0,
+    options: 4,
+    capslock: false,
+    alpha: 'eng',
+    symbnum: 'def',
+
+    def: function(){
+        this.active = 0;
+        populate();
+    },
+
+    alter: function(){
+        this.active = (this.active + 1) % this.options;
+        populate();
+    }
+};
