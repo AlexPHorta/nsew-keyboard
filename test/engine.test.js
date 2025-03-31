@@ -12,7 +12,6 @@ describe('Engine', function () {
   describe('alphachar', function () {
     it('there are no repeated keys in each languge', function () {
       for (let lang in alphachar) {
-        console.log(alphachar[lang]);
         expect(alphachar[lang]).toBeInstanceOf(Set);
       }
     });
@@ -23,7 +22,7 @@ describe('Engine', function () {
   describe('alphachar', function () {
     it('there are 30 items in each language', function () {
       for (let lang in alphachar) {
-        expect(alphachar[lang]).toHaveLength(30);
+        expect(alphachar[lang].size).toBe(30);
       }
     });
   });
