@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A virtual keyboard designed for remote controllers and pointing devices with only directional keys.",
   "main": "nsew.js",
+  "type": "module",
   "engines": {
     "node": ">=10.0.0"
   },
@@ -10,7 +11,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,11 @@
   },
   "homepage": "https://www.buey.net.br/pages/nsew-virtual-keyboard/",
   "devDependencies": {
-    "http-server": "^14.1.1",
-    "mocha": "^11.1.0"
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^26.0.0"
   }
 }
