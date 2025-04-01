@@ -1,4 +1,4 @@
-import { alphachar, symbnumchar } from '../backend/engine.js';
+import { alphachar, config, symbnumchar } from '../backend/engine.js';
 
 describe('Engine', function () {
 
@@ -89,4 +89,16 @@ describe('Engine', function () {
       }
     });
   });
+
+  describe('config', function () {
+    const conf_keys = ['active', 'options', 'capslock', 'alpha', 'symbnum', 'def', 'alter'];
+
+    test.each(conf_keys)
+      ('%s in config', (k) => { expect(k in config).toBeTruthy() });
+
+    it('has this number of items', function () {
+      expect(Object.keys(config).length).toBe(conf_keys.length);
+    });
+  });
+
 });
